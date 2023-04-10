@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.UUID;
 
 @WebServlet({"/trangchu/index", "/product/detail", "/trangchu/sanpham",
-        "/trangchu/addcard", "/trangchu/doimatkhau", "/trangchu/submitdoimk"})
+        "/trangchu/addcard", "/trangchu/doimatkhau", "/trangchu/submitdoimk","/trangchu/search"})
 public class TrangChuServlet extends HttpServlet {
 
     private TrangChuRepository trangChuRepo;
@@ -65,7 +65,22 @@ public class TrangChuServlet extends HttpServlet {
         String url = request.getRequestURI().toString();
         if (url.contains("/trangchu/submitdoimk")) {
             changePass(request, response);
+        }else if(url.contains("/trangchu/search")){
+            searchProduct(request,response);
         }
+    }
+
+    private void searchProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String seach = request.getParameter("search");
+        System.out.println(seach);
+        List<CTSanPham> list = trangChuRepo.findSearchProduct(seach);
+        HttpSession session = request.getSession();
+        KhachHang khachHang = (KhachHang) session.getAttribute("khachHangLogin");
+        int soLuong = trangChuRepo.findGioHangByKhachHang(khachHang);
+        getServletContext().setAttribute("soLuong", soLuong);
+        request.setAttribute("listProduct", list);
+        request.setAttribute("main", "/user/trangchu.jsp");
+        request.getRequestDispatcher("/layoutkh.jsp").forward(request, response);
     }
 
     private void changePass(HttpServletRequest request, HttpServletResponse response) throws InvocationTargetException, IllegalAccessException, IOException {

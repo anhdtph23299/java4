@@ -12,13 +12,14 @@
     <div class="row container">
         <div class="col-4"></div>
         <div class="col-6">
-            <form class="d-flex" role="search">
+            <form class="d-flex" role="search" method="post" action="/trangchu/search">
                 <input
                         class="form-control me-2"
                         type="search"
                         placeholder="Search"
                         aria-label="Search"
                         style="width: 400px"
+                        name="search"
                 />
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>

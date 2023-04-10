@@ -52,10 +52,12 @@
         </div>
         <nav class="navbar bg-body-tertiary">
             <div class="container-fluid">
-                <img
-                        src="https://dcassetcdn.com/design_img/6165/17990/17990_139608_6165_image.jpg"
-                        style="width: 200px; height: 100px"
-                />
+                <a href="/trangchu/index">
+                    <img
+                            src="https://dcassetcdn.com/design_img/6165/17990/17990_139608_6165_image.jpg"
+                            style="width: 200px; height: 100px"
+                    />
+                </a>
                 <a class="navbar-brand" href="/trangchu/index">Trang chủ</a>
                 <a class="navbar-brand" href="/trangchu/sanpham">Sản phẩm</a>
                 <a class="navbar-brand" href="/trangchu/gioithieu">Giới thiệu cửa hàng</a>

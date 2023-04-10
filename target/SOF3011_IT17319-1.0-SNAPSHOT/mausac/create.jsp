@@ -22,7 +22,7 @@
                         aria-describedby="basic-addon1"
                         name="ma"
                 />
-                <div class=" error mt-2"><p>${errorma}</p></div
+                <div class=" error mt-2"><p>${errorma}</p></div>
                 <div class=" error mt-2"><p>${trungma}</p></div>
             </div>
         </div>

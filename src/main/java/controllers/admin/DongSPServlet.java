@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.apache.commons.beanutils.BeanUtils;
 import repositories.DongSPRepository;
 import utils.CheckString;
@@ -62,9 +63,10 @@ public class DongSPServlet extends HttpServlet {
     public void create(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
         request.setAttribute("navbar","/layout/sanpham.jsp");
-        request.setAttribute("errorma",errorMa);
-        request.setAttribute("errorten",errorTen);
-        request.setAttribute("trungma",trungMa);
+        HttpSession session = request.getSession();
+        session.setAttribute("errorma",errorMa);
+        session.setAttribute("errorten",errorTen);
+        session.setAttribute("trungma",trungMa);
         request.setAttribute("view","/dongsp/create.jsp");
         request.getRequestDispatcher("/layout.jsp").forward(request, response);
     }
@@ -93,6 +95,7 @@ public class DongSPServlet extends HttpServlet {
             response.sendRedirect("/dongsp/create");
             return;
         }
+        dongSP.setTrangThai(0);
         dongSPRepo.insert(dongSP);
         response.sendRedirect("/dongsp/index");
     }
@@ -125,9 +128,9 @@ public class DongSPServlet extends HttpServlet {
         String ma = request.getParameter("ma");
         DongSP dongSP = dongSPRepo.findMa(ma);
         request.setAttribute("dongsp",dongSP);
-        request.setAttribute("errorma",errorMa);
-        request.setAttribute("errorten",errorTen);
-        request.setAttribute("trungma",trungMa);
+        HttpSession session = request.getSession();
+        session.setAttribute("errorma",errorMa);
+        session.setAttribute("errorten",errorTen);
         request.setAttribute("navbar","/layout/sanpham.jsp");
         request.setAttribute("view","/dongsp/edit.jsp");
         request.getRequestDispatcher("/layout.jsp").forward(request, response);

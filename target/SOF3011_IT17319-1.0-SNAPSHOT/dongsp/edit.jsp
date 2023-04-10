@@ -25,6 +25,8 @@
 
                 />
             </div>
+            <div class=" error mt-2"><p>${errorma}</p></div>
+
         </div>
         <!--  -->
         <div class="row mt-5 mb-4">
@@ -40,6 +42,9 @@
                         name="ten"
                         value="${dongsp.ten}"
                 />
+            </div>
+            <div class="error mt-2">
+                <p>${errorten}</p>
             </div>
         </div>
         <!--  -->

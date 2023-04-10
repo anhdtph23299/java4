@@ -23,13 +23,13 @@
 <body>
 <!-- SIDEBAR -->
 <section id="sidebar">
-    <a href="#" class="brand">
+    <a href="/trangchu/index" class="brand">
         <i class="bx bxs-smile"></i>
         <span class="text">AdminHub</span>
     </a>
     <ul class="side-menu top">
         <li>
-            <a href="/quanlihd/index">
+            <a href="/hoadon/index">
                 <i class="bx bxs-dashboard"></i>
                 <span class="text">Thống Kê</span>
             </a>
@@ -53,7 +53,6 @@
             </a>
         </li>
     </ul>
-
     <ul class="side-menu">
         <li>
             <a href="#">

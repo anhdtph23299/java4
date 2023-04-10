@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.apache.commons.beanutils.BeanUtils;
 import repositories.CuaHangRepository;
 import utils.CheckString;
@@ -64,10 +65,11 @@ public class CuaHangServlet extends HttpServlet {
 
     public void create(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-        request.setAttribute("errorma",errorMa);
-        request.setAttribute("trungma",trungMa);
-        request.setAttribute("errorten",errorTen);
-        request.setAttribute("errordiachi",errorDiaChi);
+        HttpSession session = request.getSession();
+        session.setAttribute("errorma",errorMa);
+        session.setAttribute("trungma",trungMa);
+        session.setAttribute("errorten",errorTen);
+        session.setAttribute("errordiachi",errorDiaChi);
         request.setAttribute("navbar","/layout/nhanvien.jsp");
         request.setAttribute("view","/cuahang/create.jsp");
         request.getRequestDispatcher("/layout.jsp").forward(request, response);
@@ -102,6 +104,7 @@ public class CuaHangServlet extends HttpServlet {
             response.sendRedirect("/cuahang/create");
             return;
         }
+        cuaHang.setTrangThai(0);
         cuaHangRepo.insert(cuaHang);
         response.sendRedirect("/cuahang/index");
     }
@@ -133,9 +136,10 @@ public class CuaHangServlet extends HttpServlet {
         String ma = request.getParameter("ma");
         CuaHang cuaHang = cuaHangRepo.findMa(ma);
         request.setAttribute("ch", cuaHang);
-        request.setAttribute("errorma",errorMa);
-        request.setAttribute("errorten",errorTen);
-        request.setAttribute("errordiachi",errorDiaChi);
+        HttpSession session = request.getSession();
+        session.setAttribute("errorma",errorMa);
+        session.setAttribute("errorten",errorTen);
+        session.setAttribute("errordiachi",errorDiaChi);
         request.setAttribute("navbar","/layout/nhanvien.jsp");
         request.setAttribute("view","/cuahang/edit.jsp");
         request.getRequestDispatcher("/layout.jsp").forward(request, response);

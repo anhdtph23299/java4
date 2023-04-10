@@ -30,6 +30,17 @@ public class TrangChuRepository {
         }
     }
 
+    public List<CTSanPham> findSearchProduct(String search){
+        Query query = hSession.createQuery("select k from CTSanPham k where k.sanPham.ten like :ten");
+        query.setParameter("ten", "%" + search + "%");
+
+        try {
+            return query.getResultList();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
     public GioHang findGioHangByKhachHang(UUID idKhachHang){
         Query query = hSession.createQuery("select gh from GioHang gh " +
                 "where gh.khachHang.id =:id and gh.tinhTrang=1",GioHang.class);

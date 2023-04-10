@@ -26,10 +26,10 @@
                 <select
                         class="form-select"
                         aria-label="Default select example"
-                        name="maSanPham"
+                        name="SanPham"
                 >
                     <c:forEach items="${listSanPham}" var="x">
-                        <option value="${x.ma}">${x.ten}</option>
+                        <option value="${x}">${x.ten}</option>
                     </c:forEach>
                 </select>
             </div>

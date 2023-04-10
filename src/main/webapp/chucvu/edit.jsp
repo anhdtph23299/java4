@@ -23,6 +23,7 @@
                         value="${cv.ma}"
                 />
             </div>
+            <div class="error mt-2"><p>${checkma}</p></div>
         </div>
         <!--  -->
         <div class="row mt-5 mb-4">
@@ -39,6 +40,7 @@
                         value="${cv.ten}"
                 />
             </div>
+            <div class="col error mt-2"><p>${checkten}</p></div>
         </div>
         <!--  -->
         <button type="submit" class="btn btn-success">Sửa</button>

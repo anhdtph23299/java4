@@ -111,20 +111,30 @@ public class CTSanPhamServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        String maSanPham = request.getParameter("maSanPham");
-        String maNSX = request.getParameter("maNSX");
-        String maDongSP = request.getParameter("maDongSP");
-        String maMauSac = request.getParameter("maMauSac");
-        SanPham sanPham = ctSanPhamRepo.findMaSanPham(maSanPham);
-        NSX nsx = ctSanPhamRepo.findMaNSX(maNSX);
-        DongSP dongSP = ctSanPhamRepo.findMaDongSP(maDongSP);
-        MauSac mauSac = ctSanPhamRepo.findMaMauSac(maMauSac);
-        ctSanPham.setSanPham(sanPham);
-        ctSanPham.setDongSP(dongSP);
-        ctSanPham.setMauSac(mauSac);
-        ctSanPham.setNsx(nsx);
-        ctSanPham.setImages(filename);
-        ctSanPhamRepo.insert(ctSanPham);
+//        String maSanPham = request.getParameter("maSanPham");
+        SanPham sanPham = new SanPham();
+        try {
+            BeanUtils.setProperty(sanPham, "ten", request.getParameter("SanPham"));
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        System.out.println(sanPham);
+//
+//        String maNSX = request.getParameter("maNSX");
+//        String maDongSP = request.getParameter("maDongSP");
+//        String maMauSac = request.getParameter("maMauSac");
+////        SanPham sanPham = ctSanPhamRepo.findMaSanPham(maSanPham);
+//        NSX nsx = ctSanPhamRepo.findMaNSX(maNSX);
+//        DongSP dongSP = ctSanPhamRepo.findMaDongSP(maDongSP);
+//        MauSac mauSac = ctSanPhamRepo.findMaMauSac(maMauSac);
+//        ctSanPham.setSanPham(sanPham);
+//        ctSanPham.setDongSP(dongSP);
+//        ctSanPham.setMauSac(mauSac);
+//        ctSanPham.setNsx(nsx);
+//        ctSanPham.setImages(filename);
+//        ctSanPhamRepo.insert(ctSanPham);
         response.sendRedirect("/ctsanpham/index");
     }
 
@@ -140,7 +150,7 @@ public class CTSanPhamServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-// Lấy ảnh rồi gán vào forder images tạo ra
+        // Lấy ảnh rồi gán vào forder images tạo ra
         String filename = null;
         try {
             String uploadPath = request.getServletContext().getRealPath("/") + "images";

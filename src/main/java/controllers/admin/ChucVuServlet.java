@@ -65,10 +65,10 @@ public class ChucVuServlet extends HttpServlet {
 
     public void create(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-        System.out.println(error);
-        request.setAttribute("trungMa",error);
-        request.setAttribute("checkten", errorTen);
-        request.setAttribute("checkma", errorMa);
+        HttpSession session = request.getSession();
+        session.setAttribute("trungMa",error);
+        session.setAttribute("checkten", errorTen);
+        session.setAttribute("checkma", errorMa);
         request.setAttribute("navbar","/layout/nhanvien.jsp");
         request.setAttribute("view","/chucvu/create.jsp");
         request.getRequestDispatcher("/layout.jsp").forward(request, response);
@@ -100,7 +100,7 @@ public class ChucVuServlet extends HttpServlet {
             return;
         }
 
-
+        chucVu.setTrangThai(0);
         chucVuRepo.insert(chucVu);
         response.sendRedirect("/chucvu/index");
     }
@@ -116,6 +116,12 @@ public class ChucVuServlet extends HttpServlet {
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
+        if (!errorTen.isEmpty()||!errorMa.isEmpty()){
+            response.sendRedirect("/chucvu/edit");
+            return;
+        }
+        errorTen = CheckString.checkValues(chucVu.getTen(),"tên");
+        errorMa = CheckString.checkValues(chucVu.getMa(),"mã");
         chucVuRepo.update(chucVu);
         response.sendRedirect("/chucvu/index");
     }
@@ -124,6 +130,9 @@ public class ChucVuServlet extends HttpServlet {
             throws ServletException, IOException {
         String ma = request.getParameter("ma");
         ChucVu chucVu = chucVuRepo.findMa(ma);
+        HttpSession session = request.getSession();
+        session.setAttribute("checkten", errorTen);
+        session.setAttribute("checkma", errorMa);
         request.setAttribute("cv", chucVu);
         request.setAttribute("navbar","/layout/nhanvien.jsp");
         request.setAttribute("view","/chucvu/edit.jsp");

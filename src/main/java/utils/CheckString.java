@@ -4,7 +4,7 @@ import jakarta.servlet.http.HttpSession;
 
 public class CheckString {
     public static String checkValues(String value,String ten){
-        if (value.isEmpty()){
+        if (value.trim().isEmpty()){
             return "Phải nhập "+ten;
         }
         return "";
